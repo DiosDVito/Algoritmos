@@ -12,7 +12,7 @@ class Graph {
     public:
         Graph(int n);
         void loadGraph(int V, int W);
-        void DSF(int s); // Search key
+        void DFS(int s); // Search key
         void BFS(int s);  
 };
 
@@ -25,7 +25,7 @@ void Graph::loadGraph(int n, int m){
     adj[n].push_back(m);
 }
 
-void Graph::DSF(int s){
+void Graph::DFS(int s){
     bool *visited = new bool[n];
 
     for(int i = 0 ; i < n; i++){
@@ -83,14 +83,53 @@ void Graph::BFS(int s){
 }
 
 int main() {
-    Graph g(5);
-    g.loadGraph(0, 1);
-    g.loadGraph(0, 2);
-    g.loadGraph(1, 0);
-    g.loadGraph(2, 0);
-    g.loadGraph(1, 2);
-    g.loadGraph(2, 1);
-    g.DSF(0);
+    //Grafo lineal:
+    Graph g1(4);
+    g1.loadGraph(0, 1);
+    g1.loadGraph(1, 2);
+    g1.loadGraph(2, 3);
+    cout << "Grafo lineal: " << endl;
+    g1.DFS(0);
     cout << endl;
-    g.BFS(0);
+    g1.BFS(0);
+    cout << endl;
+
+    //Grafo no conectado:
+    Graph g2(6);
+    g2.loadGraph(0, 1);
+    g2.loadGraph(1, 2);
+    g2.loadGraph(3, 4);
+    g2.loadGraph(4, 5);
+    cout << "Grafo no conectado: " << endl;
+    g2.DFS(0);
+    cout << endl;
+    g2.BFS(0);
+    cout << endl;
+
+    //Grafo cíclico:
+    Graph g3(4);
+    g3.loadGraph(0, 1);
+    g3.loadGraph(1, 2);
+    g3.loadGraph(2, 3);
+    g3.loadGraph(3, 0);
+    cout << "Grafo ciclico: " << endl;
+    g3.DFS(0);
+    cout << endl;
+    g3.BFS(0);
+    cout << endl;
+
+    //Grafo con múltiples aristas:
+    Graph g4(4);
+    g4.loadGraph(0, 1);
+    g4.loadGraph(0, 2);
+    g4.loadGraph(1, 2);
+    g4.loadGraph(2, 0);
+    g4.loadGraph(2, 3);
+    g4.loadGraph(3, 3);
+    cout << "Grafo con multiples aristas: " << endl;
+    g4.DFS(0);
+    cout << endl;
+    g4.BFS(0);
+
+
 }
